@@ -1,52 +1,33 @@
-ZendSkeletonApplication
+Zend sample application
 =======================
 
 Introduction
 ------------
-This is a simple, skeleton application using the ZF2 MVC layer and module
-systems. This application is meant to be used as a starting place for those
-looking to get their feet wet with ZF2.
+This is a simple, we are using a sceletop application to build
+as simple application to manage students, homeworks and grades.
 
 
 Installation
 ------------
+Download Zend Framework 2 and extract it.
+Set up enviroment constant, which points to zend library:
 
-Using Composer (recommended)
-----------------------------
-The recommended way to get a working copy of this project is to clone the repository
-and use `composer` to install dependencies using the `create-project` command:
+SetEnv ZF2_PATH "/usr/share/php/zf2/library"
 
-    curl -s https://getcomposer.org/installer | php --
-    php composer.phar create-project --repository-url="http://packages.zendframework.com" zendframework/skeleton-application path/to/install
+Create your virtualhost configuration or modify .htaccess as follows:
 
-Alternately, clone the repository and manually invoke `composer` using the shipped
-`composer.phar`:
+<VirtualHost *:80>
+    ServerName localhost.zend
+    DocumentRoot */ZendSample/public
+    SetEnv APPLICATION_ENV "development"
+    SetEnv ZF2_PATH "/usr/share/php/zf2/library"
+    <Directory */ZendSample/public>
+        DirectoryIndex index.php
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
 
-    cd my/project/dir
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git
-    cd ZendSkeletonApplication
-    php composer.phar self-update
-    php composer.phar install
+Checkuot this repository to your document root (*/ZendSample/public).
 
-(The `self-update` directive is to ensure you have an up-to-date `composer.phar`
-available.)
-
-Another alternative for downloading the project is to grab it via `curl`, and
-then pass it to `tar`:
-
-    cd my/project/dir
-    curl -#L https://github.com/zendframework/ZendSkeletonApplication/tarball/master | tar xz --strip-components=1
-
-You would then invoke `composer` to install dependencies per the previous
-example.
-
-Using Git submodules
---------------------
-Alternatively, you can install using native git submodules:
-
-    git clone git://github.com/zendframework/ZendSkeletonApplication.git --recursive
-
-Virtual Host
-------------
-Afterwards, set up a virtual host to point to the public/ directory of the
-project and you should be ready to go!
