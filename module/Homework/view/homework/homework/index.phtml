@@ -1,0 +1,31 @@
+<?php
+
+$title = 'Homeworks';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('homework', array('action'=>'add'));?>">Add new homework</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th></th>
+    </tr>
+    <?php foreach ($homeworks as $homework) : ?>
+    <tr>
+        <td><?php echo $homework->id;?></td>
+        <td><?php echo $this->escapeHtml( $homework->name);?></td>
+        <td><?php echo $homework->date; ?></td>
+        <td>
+            <a href="<?php echo $this->url('homework',
+                array('action'=>'edit', 'id' => $homework->id));?>">Edit</a>
+            <a href="<?php echo $this->url('homework',
+                array('action'=>'delete', 'id' => $homework->id));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>
