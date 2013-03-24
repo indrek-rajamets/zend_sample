@@ -4,6 +4,7 @@ return array(
         'invokables' => array(
             'Homework\Controller\Student' => 'Homework\Controller\StudentController',
             'Homework\Controller\Homework' => 'Homework\Controller\HomeworkController',
+            'Homework\Controller\Grade' => 'Homework\Controller\GradeController',
         ),
     ),
     'router' => array(
@@ -32,6 +33,21 @@ return array(
                     ),
                     'defaults' => array(
                         'controller' => 'Homework\Controller\Homework',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+	        'grade' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/grade[/:action][/:homework_id][/:student_id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'homework_id'     => '[0-9]+',
+                        'student_id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Homework\Controller\Grade',
                         'action'     => 'index',
                     ),
                 ),

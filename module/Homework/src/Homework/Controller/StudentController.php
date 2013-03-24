@@ -15,8 +15,9 @@ class StudentController extends AbstractActionController
 
     public function indexAction()
     {
+
         return new ViewModel(array(
-            'students' => $this->getStudentTable()->fetchAll(),
+            'students' => $this->getStudentTable()->fetchAllWithGrades(),
         ));
     }
 
@@ -107,7 +108,7 @@ class StudentController extends AbstractActionController
     {
         if (!$this->studentTable) {
             $sm = $this->getServiceLocator();
-            $this->studentTable = $sm->get('Homweork\Model\StudentTable');
+            $this->studentTable = $sm->get('Homework\Model\StudentTable');
         }
         return $this->studentTable;
     }

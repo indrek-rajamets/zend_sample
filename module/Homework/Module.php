@@ -11,8 +11,11 @@ use Homework\Model\Student;
 use Homework\Model\StudentTable;
 use Homework\Model\Homework;
 use Homework\Model\HomeworkTable;
+use Homework\Model\Grade;
+use Homework\Model\GradeTable;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\Adapter;
 
 class Module
 {
@@ -39,7 +42,7 @@ class Module
     {
         return array(
             'factories' => array(
-                'Homweork\Model\StudentTable' =>  function($sm) {
+                'Homework\Model\StudentTable' =>  function($sm) {
                     $tableGateway = $sm->get('StudentTableGateway');
                     $table = new StudentTable($tableGateway);
                     return $table;
@@ -50,7 +53,7 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new Student());
                     return new TableGateway('student', $dbAdapter, null, $resultSetPrototype);
                 },
-                'Homweork\Model\HomeworkTable' =>  function($sm) {
+                'Homework\Model\HomeworkTable' =>  function($sm) {
                     $tableGateway = $sm->get('HomeworkTableGateway');
                     $table = new HomeworkTable($tableGateway);
                     return $table;
@@ -60,6 +63,22 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Homework());
                     return new TableGateway('homework', $dbAdapter, null, $resultSetPrototype);
+                },
+	            'Homework\Model\GradeTable' =>  function($sm) {
+                    $tableGateway = $sm->get('GradeTableGateway');
+                    $table = new GradeTable($tableGateway);
+                    return $table;
+                },
+	            'Homework\Model\Grade' =>  function($sm) {
+                    $tableGateway = $sm->get('GradeTableGateway');
+                    $table = new Grade($tableGateway);
+                    return $table;
+                },
+                'GradeTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Grade());
+                    return new TableGateway('grade', $dbAdapter, null, $resultSetPrototype);
                 },
             ),
         );

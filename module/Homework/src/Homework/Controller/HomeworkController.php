@@ -106,7 +106,7 @@ class HomeworkController extends AbstractActionController
     {
         if (!$this->homeworkTable) {
             $sm = $this->getServiceLocator();
-            $this->homeworkTable = $sm->get('Homweork\Model\HomeworkTable');
+            $this->homeworkTable = $sm->get('Homework\Model\HomeworkTable');
         }
         return $this->homeworkTable;
     }

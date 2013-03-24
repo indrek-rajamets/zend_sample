@@ -18,6 +18,25 @@ class StudentTable
         return $resultSet;
     }
 
+	public function fetchAllWithGrades(){
+		$sql = new \Zend\Db\Sql\Sql($this->tableGateway->adapter);
+
+		$select = $sql->select();
+		$select->from('student')
+			->join('grade', 'grade.student_id = student.id',\Zend\Db\Sql\Select::SQL_STAR,\Zend\Db\Sql\Select::JOIN_LEFT)
+			->columns(array(
+				new \Zend\Db\Sql\Expression('AVG(grade.grade) as avgGrade'),
+				'first_name',
+				'last_name',
+				'id',
+			))
+			->group("student.id");
+		//echo $select->getSqlString();
+		$statement = $sql->prepareStatementForSqlObject($select);
+		$result = $statement->execute();
+		return $result;
+	}
+
     public function getStudent($id)
     {
         $id  = (int) $id;

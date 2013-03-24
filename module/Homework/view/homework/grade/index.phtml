@@ -1,0 +1,31 @@
+<?php
+
+$title = 'Grades';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('grade', array('action'=>'add'));?>">Add new grade</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>Student</th>
+        <th>Homework</th>
+        <th>Grade</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($grades as $grade) : /** @var $grade \Homework\Model\Grade */?>
+    <tr>
+        <td><?php echo $grade['first_name'].' '.$grade['last_name'] ?></td>
+        <td><?php echo $grade['name']; ?></td>
+        <td><?php echo $grade['grade']; ?></td>
+        <td>
+            <a href="<?php echo $this->url('grade',
+                array('action'=>'edit', 'homework_id' => $grade['homework_id'],'student_id' => $grade['student_id']));?>">Edit</a>
+            <a href="<?php echo $this->url('grade',
+                array('action'=>'delete', 'homework_id' => $grade['homework_id'],'student_id' => $grade['student_id']));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

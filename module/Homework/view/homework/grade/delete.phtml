@@ -1,0 +1,27 @@
+<?php
+/** @var \Homework\Model\Grade $grade */
+
+$title = 'Delete grade';
+$this->headTitle($title);
+
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p>Are you sure that you want to delete
+    '<?php echo $this->escapeHtml($grade->grade); ?>'?
+</p>
+<?php
+$url = $this->url('grade', array(
+    'action' => 'delete',
+	'homework_id' => $grade->homeworkId,
+	'student_id' => $grade->studentId
+));
+?>
+<form action="<?php echo $url; ?>" method="post">
+    <div>
+        <input type="hidden" name="homework_id" value="<?php echo (int) $grade->homeworkId; ?>" />
+        <input type="hidden" name="student_id" value="<?php echo (int) $grade->studentId; ?>" />
+        <input type="submit" name="del" value="Yes" />
+        <input type="submit" name="del" value="No" />
+    </div>
+</form>

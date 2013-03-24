@@ -12,17 +12,19 @@ $this->headTitle($title);
     <tr>
         <th>ID</th>
         <th>Name</th>
+        <th>Avg Grade</th>
         <th>&nbsp;</th>
     </tr>
     <?php foreach ($students as $student) : ?>
     <tr>
-        <td><?php echo $student->id;?></td>
-        <td><?php echo $this->escapeHtml( $student->firstName.' '.$student->lastName );?></td>
+        <td><?php echo $student['id'];?></td>
+        <td><?php echo $this->escapeHtml( $student['first_name'].' '.$student['last_name'] );?></td>
+        <td><?php echo round( $student['avgGrade'],1 );?></td>
         <td>
             <a href="<?php echo $this->url('student',
-                array('action'=>'edit', 'id' => $student->id));?>">Edit</a>
+                array('action'=>'edit', 'id' => $student['id']));?>">Edit</a>
             <a href="<?php echo $this->url('student',
-                array('action'=>'delete', 'id' => $student->id));?>">Delete</a>
+                array('action'=>'delete', 'id' => $student['id']));?>">Delete</a>
         </td>
     </tr>
     <?php endforeach; ?>
